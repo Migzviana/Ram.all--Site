@@ -1,0 +1,57 @@
+@import "../../../styles/variables.scss";
+
+.table-container {
+    overflow-x: auto;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      th, td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #e0e0e0;
+      }
+
+      th {
+        background-color: $gray-secondary-bg;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      td {
+        font-size: 14px;
+      }
+
+      button {
+        padding: 8px 16px;
+        font-size: 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &.btn-primary {
+          background-color: $primary-color;
+          color: white;
+        }
+
+        &.btn-secondary {
+          background-color: transparent;
+          border: 1px solid $primary-color;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .available {
+    color: green;
+    font-weight: bold;
+  }
+
+  .unavailable {
+    color: red;
+    font-weight: bold;
+  }

@@ -1,0 +1,16 @@
+<div class="search-wrapper">
+    <label for="search">Buscar ramal</label>
+    <div class="search-input">
+      <input
+        id="search"
+        type="text"
+        [placeholder]="placeholder"
+        [(ngModel)]="query"
+        (input)="search.emit(query)"
+      />
+      <div class="icon">
+        <img src="/assets/svg/search-icon.svg" alt="Buscar" />
+      </div>
+    </div>
+  </div>
+  

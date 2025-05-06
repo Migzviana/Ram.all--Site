@@ -1,0 +1,70 @@
+<main class="main-container">
+  <app-sidebar 
+  (onLogout)="logout()"
+  (viewChange)="setView($event)">
+  </app-sidebar>
+
+  <section class="right-panel">
+    <header class="header">
+      <h2>
+        {{
+          currentView === 'all' ? 'Todos os Ramais' :
+          currentView === 'available' ? 'Ramais Disponíveis' :
+          'Ramais por Intervalo'
+        }}
+      </h2>
+      <span class="subtext">
+        {{
+          currentView === 'all' ? 'Veja todos os ramais' :
+          currentView === 'available' ? 'Veja os ramais não logados' :
+          'Veja os ramais dentro de um intervalo'
+        }}
+      </span>
+    </header>
+
+    <app-extension-search (search)="onSearch($event)"></app-extension-search>
+
+    <div *ngIf="currentView === 'range'" class="range-form">
+      <label>De:
+        <input type="number" [(ngModel)]="rangeStart" />
+      </label>
+      <label>Até:
+        <input type="number" [(ngModel)]="rangeEnd" />
+      </label>
+      <button class="buttonFilter" (click)="applyRange()">Filtrar</button>
+    </div>
+
+    <app-extension-table
+      *ngIf="currentView === 'all'"
+      [extensions]="filteredExtensions"
+      [canLogin]="canLogin"
+      [canLogout]="canLogout"
+      [showLogoutButton]="true"
+      (login)="handleLogin($event)"
+      (logout)="handleLogout($event)"
+    ></app-extension-table>
+
+    <app-extension-table
+      *ngIf="currentView === 'available'"
+      [extensions]="filteredAvailableExtensions"
+      [canLogin]="canLogin"
+      [canLogout]="canLogout"
+      [showLogoutButton]="false"
+      (login)="handleLogin($event)"
+    ></app-extension-table>
+
+    <app-extension-table
+      *ngIf="currentView === 'range' && filteredRangeExtensions.length > 0"
+      [extensions]="filteredRangeExtensions"
+      [canLogin]="canLogin"
+      [canLogout]="canLogout"
+      [showLogoutButton]="true"
+      (login)="handleLogin($event)"
+      (logout)="handleLogout($event)"
+    ></app-extension-table>
+
+    <div *ngIf="currentView === 'range' && filteredRangeExtensions.length === 0" class="no-results">
+      Nenhum ramal encontrado no intervalo informado.
+    </div>
+  </section>
+</main>

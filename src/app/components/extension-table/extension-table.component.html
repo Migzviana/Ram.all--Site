@@ -1,0 +1,38 @@
+<div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Ramal</th>
+          <th>Usuário Logado</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let extension of extensions">
+          <td>{{ extension.extensionNumber }}</td>
+          <td>{{ extension.loggedUser || 'Não logado' }}</td>
+          <td>
+            <span [ngClass]="{ 'available': !extension.loggedUser, 'unavailable': extension.loggedUser }">
+              {{ extension.loggedUser ? 'Ocupado' : 'Disponível' }}
+            </span>
+          </td>
+          <td>
+            <button *ngIf="!extension.loggedUser"
+                    (click)="handleLogin(extension.extensionNumber)"
+                    [disabled]="!canLogin(extension)"
+                    class="btn-primary">
+              Login
+            </button>
+  
+            <button *ngIf="extension.loggedUser && showLogoutButton"
+                    (click)="handleLogout(extension.extensionNumber)"
+                    [disabled]="!canLogout(extension)"
+                    class="btn-secondary">
+              Logout
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

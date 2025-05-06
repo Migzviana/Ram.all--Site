@@ -1,0 +1,77 @@
+@import "../../../styles/variables.scss";
+
+.left-panel {
+    background-color: $gray-bg;
+    width: 310px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    text-align: center;
+  
+    .logout-btn{
+      margin-top: 320px;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      padding: 10px 50px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  
+    img {
+      height: 80px;
+      margin-bottom: 10px;
+    }
+  
+    h1 {
+      font-size: 24px;
+      color: $primary-color;
+      font-weight: bold;
+    }
+  
+    .subtitle {
+      font-size: 14px;
+      color: $text-color;
+    }
+  
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    
+      .buttonMenu {
+        background: none;
+        border: none;
+        font-size: 16px;
+        color: $primary-color;
+        font-weight: 500;
+        padding: 8px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        display: block;
+    
+        &:hover {
+          background-color: rgba($primary-color, 0.1);
+        }
+    
+        &.active {
+          background-color: $primary-color;
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
+  }

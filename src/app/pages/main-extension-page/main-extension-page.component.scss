@@ -1,0 +1,98 @@
+@import "../../../styles/variables.scss";
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.right-panel {
+  flex: 1;
+  padding: 40px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow-y: auto;
+  max-height: 100vh;
+
+  .range-form {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background-color: $gray-secondary-bg;
+    border-radius: 8px;
+  
+    label {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      color: $text-color;
+      gap: 4px;
+  
+      input {
+        padding: 8px 12px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+  
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+        }
+  
+        &::placeholder {
+          color: lighten($text-color, 30%);
+        }
+      }
+    }
+  
+    .buttonFilter {
+      padding: 8px 16px;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      align-self: flex-end;
+      margin-left: 0;
+  
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+  
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+
+  .header {
+    h2 {
+      font-size: 22px;
+      color: $secondary-color;
+      font-weight: bold;
+    }
+
+    .subtext {
+      font-size: 14px;
+      color: $text-color;
+    }
+  }
+
+  .available {
+    color: green;
+    font-weight: bold;
+  }
+
+  .unavailable {
+    color: red;
+    font-weight: bold;
+  }
+}
