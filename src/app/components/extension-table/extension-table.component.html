@@ -28,6 +28,7 @@
             <button *ngIf="extension.loggedUser && showLogoutButton"
                     (click)="handleLogout(extension.extensionNumber)"
                     [disabled]="!canLogout(extension)"
+                    [title]="!canLogout(extension) ? 'Você só pode deslogar seu próprio usuário' : ''"
                     class="btn-secondary">
               Logout
             </button>

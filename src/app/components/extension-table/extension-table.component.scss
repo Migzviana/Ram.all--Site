@@ -41,6 +41,12 @@
           background-color: transparent;
           border: 1px solid $primary-color;
           color: $primary-color;
+        
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+          }
         }
       }
     }
