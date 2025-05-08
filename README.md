@@ -6,7 +6,7 @@ Aplicação web desenvolvida com **Angular** para o gerenciamento de ramais, com
 
 🎯 **Objetivo**
 
-O objetivo principal do projeto é facilitar o gerenciamento de ramais de uma empresa, permitindo que os usuários se cadastrem, façam login e realizem operações de login/logout nos ramais disponíveis. O sistema também possibilita a visualização de ramais em diferentes estados e intervalos, além de oferecer uma interface intuitiva para usuários administrativos.
+O objetivo principal do projeto é facilitar o gerenciamento de ramais de uma empresa, permitindo que os usuários se cadastrem, façam login e realizem operações de login/logout nos ramais disponíveis. O sistema também possibilita a visualização de ramais em diferentes estados e intervalos, além de oferecer uma interface intuitiva para usuários.
 
 ---
 
