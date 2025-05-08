@@ -52,7 +52,7 @@ O objetivo principal do projeto é facilitar o gerenciamento de ramais de uma em
 
 | Problema                                | Solução                                   |
 |-----------------------------------------|-------------------------------------------|
-| Falta de recuperação de senha no login  | Implementação de validadores customizados |
+| Falta de recuperação de senha no login  | implementação de uma funcionalidade de recuperação de senha via e-mail |
 
 ---
 
