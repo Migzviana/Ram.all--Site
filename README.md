@@ -1,27 +1,118 @@
-# Ram.all
+# Ram.all - Sistema de Gerenciamento de Ramais
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+Aplicação web desenvolvida com **Angular** para o gerenciamento de ramais, com funcionalidades de login, cadastro e controle de acesso. O sistema permite visualizar, filtrar e gerenciar ramais por diferentes intervalos e status (disponíveis, todos ou por intervalo específico). Além disso, conta com autenticação de usuários via token JWT.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+🎯 **Objetivo**
 
-## Code scaffolding
+O objetivo principal do projeto é facilitar o gerenciamento de ramais de uma empresa, permitindo que os usuários se cadastrem, façam login e realizem operações de login/logout nos ramais disponíveis. O sistema também possibilita a visualização de ramais em diferentes estados e intervalos, além de oferecer uma interface intuitiva para usuários.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+✨ **Funcionalidades**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Cadastro de usuários**: Realize o registro de novos usuários.
+- **Login de usuários**: Autentique usuários no sistema com um e-mail e senha válidos.
+- **Controle de Ramais**:
+  - Visualização de **todos os ramais** cadastrados.
+  - Visualização de **ramais disponíveis** (não logados).
+  - Filtragem de **ramais por intervalo**.
+  - Opções de **login/logout** nos ramais.
+- **Interface intuitiva** com componentes reutilizáveis como campos de entrada e tabelas de ramais.
+- **Validação de Formulários**: Verificação de campos obrigatórios e consistência dos dados fornecidos (ex: senhas iguais no cadastro).
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+🛠️ **Tecnologias e Ferramentas**
 
-## Running end-to-end tests
+| Tecnologia             | Finalidade                          |
+|------------------------|-------------------------------------|
+| Angular 17+            | Framework principal                 |
+| Angular Material       | Design responsivo e UI              |
+| RxJS                   | Programação reativa                 |
+| TypeScript             | Linguagem de desenvolvimento        |
+| ngx-toastr             | Notificações (sucesso, erro, aviso) |
+| FormsModule            | Controle de formulários             |
+| SCSS                   | Estilização                         |
+| Angular Router         | Navegação entre páginas             |
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+✍️ **Contribuições e Aprendizados**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Aprendizado prático com o Angular 17+.
+- Implementação de autenticação com tokens JWT para segurança de acesso.
+- Criação de interfaces dinâmicas e responsivas usando Angular Material.
+- Integração do frontend com uma API RESTful para gerenciamento de ramais.
+
+---
+
+🚧 **Desafios e Soluções**
+
+| Problema                                | Solução                                   |
+|-----------------------------------------|-------------------------------------------|
+| Falta de recuperação de senha no login  | implementação de uma funcionalidade de recuperação de senha via e-mail |
+
+---
+
+⚙️ **Como Executar**
+
+### Pré-requisitos
+
+- **Node.js** (v16+)
+- **npm** (v8+)
+
+### Instalação
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/seu-usuario/ram.all.git
+   ```
+
+2. Acesse a pasta do projeto:
+
+   ```bash
+   cd ram.all
+   ```
+
+3. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+### Execução
+
+Para rodar a aplicação localmente, execute:
+
+```bash
+npx ng serve --host 0.0.0.0 --port 4200
+```
+
+Acesse o projeto em: [http://localhost:4200](http://localhost:4200)
+
+### Build para Produção
+
+```bash
+npx ng build --prod
+```
+
+---
+
+🧪 **Testes Realizados**
+
+- Testes de autenticação (login, cadastro).
+- Validação dos formulários (campo de senha, e-mail e confirmação de senha).
+- Testes de funcionalidade dos filtros de ramais por intervalo e disponibilidade.
+- Verificação de responsividade em múltiplos dispositivos.
+
+---
+
+📚 **Aprendizados**
+
+- Implementação de formulários reativos com validações avançadas no Angular.
+- Criação de componentes reutilizáveis e modulares.
+- Implementação de um sistema de login com autenticação via tokens JWT.
+- Desenvolvimento de um sistema com filtros dinâmicos baseados em dados de uma API RESTful.
