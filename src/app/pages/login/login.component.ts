@@ -46,7 +46,7 @@ export class LoginComponent {
           this.toastService.success("Bem vindo ao Ram.all!");
           this.router.navigate(["/home"]);
         },
-        error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde")
+        error: () => this.toastService.error("Esta conta não existe !")
       });
     }
   }

@@ -36,6 +36,10 @@ export class MainExtensionPageComponent implements OnInit {
     private router: Router 
   ) {}
 
+  setView(view: 'all' | 'available' | 'range') {
+    this.currentView = view;
+  }
+
   ngOnInit(): void {
     this.loadAll();
     this.loadAvailable();
@@ -62,9 +66,7 @@ export class MainExtensionPageComponent implements OnInit {
     });
   }
 
-  setView(view: 'all' | 'available' | 'range') {
-    this.currentView = view;
-  }
+  
 
   applyRange(): void {
     if (this.rangeStart && this.rangeEnd && this.rangeStart <= this.rangeEnd) {

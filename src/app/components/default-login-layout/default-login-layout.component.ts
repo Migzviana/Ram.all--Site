@@ -23,7 +23,4 @@ export class DefaultLoginLayoutComponent {
   navigate(){
     this.onNavigate.emit();
   }
-
-
-
 }
