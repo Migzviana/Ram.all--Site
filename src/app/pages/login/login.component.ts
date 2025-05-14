@@ -52,6 +52,11 @@ export class LoginComponent {
   }
 
   navigate(path: string): void {
-    this.router.navigate([`/${path}`]);
+    if (path === 'reset-password'){
+      this.router.navigate([`/${path}`]);
+    }else {
+      this.router.navigate([`/${path}`]);
+    }
+    
   }
 }

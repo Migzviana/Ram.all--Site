@@ -12,7 +12,7 @@
       inputName="email"
       type="email"
       label="Email"
-      placeholder="johndoe@gmail.com"
+      placeholder="seuemail@exemplo.com"
     >
       <img src="/assets/svg/email.svg" />
     </app-primary-input>
@@ -21,10 +21,10 @@
       inputName="password"
       type="password"
       label="Senha"
-      placeholder="Your Password"
+      placeholder="Sua Senha"
     >
     <img src="/assets/svg/Pass.svg">
     </app-primary-input>
-    <span>Esqueceu a senha ?</span>
+    <span (click)="navigate('forgot-password')" style="cursor: pointer;">Esqueceu a senha ?</span>
   </form>
 </app-default-login-layout>
