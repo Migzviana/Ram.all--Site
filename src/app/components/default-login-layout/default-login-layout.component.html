@@ -5,9 +5,19 @@
     <ng-content></ng-content>
 
     <div class="btn-wrapper">
-      <button class="btn-primary" (click)="submit()" [disabled]="disablePrimaryBtn">
-        {{ primaryBtnText }}
+      <button
+        class="btn-primary"
+        (click)="submit()"
+        [disabled]="disablePrimaryBtn || loading"
+      >
+        <ng-container *ngIf="!loading; else spinnerTpl">{{
+          primaryBtnText
+        }}</ng-container>
+        <ng-template #spinnerTpl>
+          <div class="spinner"></div>
+        </ng-template>
       </button>
+
       <div class="divider">
         <div></div>
         <span>ou</span>

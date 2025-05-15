@@ -57,76 +57,69 @@ export class ResetPasswordComponent {
     return password === confirm ? null : { mismatch: true };
   }
 
-  // Método para verificar o token
   verifyToken(token: string): void {
-  const body = { token };
-
-  this.loginService.verifyResetToken(body).subscribe({
-    next: (response) => {
-      if (response.status === 200) {
+    this.loginService.verifyResetToken({ token }).subscribe({
+      next: (response: any) => {
         this.tokenValid = true;
-        this.toastr.success('Token validado com sucesso!');
-      } else {
+        const message = response?.message || 'Token validado com sucesso.';
+        this.toastr.success(message);
+      },
+      error: (error) => {
         this.tokenValid = false;
-        this.toastr.error('Token inválido.');
-      }
-    },
-    error: (error) => {
-      this.tokenValid = false;
-      const serverMessage = typeof error.error === 'string' ? error.error : 'Erro ao validar token.';
-      this.toastr.error(serverMessage);
-    },
-  });
-}
+        const message = error.error?.message || 'Erro ao validar token.';
+        this.toastr.error(message);
+      },
+    });
+  }
 
 
   submit(): void {
-  if (this.resetForm.valid) {
-    const token = this.resetForm.value.token!;
-    const newPassword = this.resetForm.value.newPassword!;
+    if (this.resetForm.valid) {
+      const token = this.resetForm.value.token!;
+      const newPassword = this.resetForm.value.newPassword!;
 
-    this.loginService.resetPassword(token, newPassword).subscribe({
-      next: (response) => {
-        // Debugging: Verificando a resposta do servidor
-        console.log('Resposta do servidor:', response);
+      this.loginService.resetPassword(token, newPassword).subscribe({
+        next: (response) => {
+          if (response.status === 200) {
+            this.toastr.success('Senha redefinida com sucesso!');
+            setTimeout(() => {
+              this.router.navigate(['/login']);
+            }, 1500);
+          } else {
+            this.toastr.error('Erro inesperado. Tente novamente.');
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Erro ao redefinir a senha:', error);
+          console.error('Detalhes do erro:', {
+            status: error.status,
+            message: error.message,
+            errorResponse: error.error,
+          });
 
-        if (response.status === 200) {
-          this.toastr.success('Senha redefinida com sucesso!');
-          this.router.navigate(['/login']);
-        } else {
-          this.toastr.error('Erro inesperado. Tente novamente.');
-        }
-      },
-      error: (error: HttpErrorResponse) => {
-        console.error('Erro ao redefinir a senha:', error);
-        console.error('Detalhes do erro:', {
-          status: error.status,
-          message: error.message,
-          errorResponse: error.error
-        });
+          const statusCode = error.status;
+          const serverMessage =
+            typeof error.error === 'string'
+              ? error.error
+              : 'Erro inesperado ao redefinir a senha.';
 
-        // Agora tratamos o erro com mais detalhes
-        const statusCode = error.status;
-        const serverMessage = typeof error.error === 'string' ? error.error : 'Erro inesperado ao redefinir a senha.';
-
-        if (statusCode === 400 && serverMessage) {
-          this.toastr.error(serverMessage);
-        } else if (statusCode === 401) {
-          this.toastr.error('Sessão expirada ou token inválido.');
-        } else if (statusCode === 500) {
-          this.toastr.error('Erro interno do servidor. Tente novamente mais tarde.');
-        } else {
-          this.toastr.error('Erro inesperado ao redefinir a senha.');
-        }
-      }
-    });
-  } else {
-    this.toastr.error('Formulário inválido. Verifique os campos.');
+          if (statusCode === 400 && serverMessage) {
+            this.toastr.error(serverMessage);
+          } else if (statusCode === 401) {
+            this.toastr.error('Sessão expirada ou token inválido.');
+          } else if (statusCode === 500) {
+            this.toastr.error(
+              'Erro interno do servidor. Tente novamente mais tarde.'
+            );
+          } else {
+            this.toastr.error('Erro inesperado ao redefinir a senha.');
+          }
+        },
+      });
+    } else {
+      this.toastr.error('Formulário inválido. Verifique os campos.');
+    }
   }
-}
-
-
-
 
   navigate(path: string): void {
     this.router.navigate([`/${path}`]);

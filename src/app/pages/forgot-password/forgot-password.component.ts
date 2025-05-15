@@ -29,6 +29,7 @@ interface ForgotPasswordForm {
 })
 export class ForgotPasswordComponent {
   forgotPasswordForm!: FormGroup<ForgotPasswordForm>;
+  isLoading = false;
 
   constructor(
     private loginService: LoginService,
@@ -43,23 +44,32 @@ export class ForgotPasswordComponent {
   submit(): void {
     if (this.forgotPasswordForm.valid) {
       const email = this.forgotPasswordForm.value.email!;
+      this.isLoading = true;
 
-      this.loginService.sendRecoveryEmail(email).pipe(
-        delay(4000)
-      ).subscribe({
-        next: (response) => {
-          if (response.status === 200) {
-            this.toastr.success('Link de recuperação enviado!');
-            this.router.navigate(['/reset-password']);
-          } else {
+      this.toastr.info('Aguarde, estamos enviando o link de recuperação...');
+
+      this.loginService
+        .sendRecoveryEmail(email)
+        .pipe(delay(4000))
+        .subscribe({
+          next: (response) => {
+            this.isLoading = false;
+            if (response.status === 200) {
+              this.toastr.success('Link de recuperação enviado!');
+              setTimeout(() => {
+                this.router.navigate(['/reset-password']);
+              }, 2000);
+            } else {
+              this.toastr.error('Erro ao enviar link de recuperação.');
+              this.isLoading = false;
+            }
+          },
+          error: (err) => {
+            console.error('Erro na requisição:', err);
             this.toastr.error('Erro ao enviar link de recuperação.');
-          }
-        },
-        error: (err) => {
-          console.error('Erro na requisição:', err); 
-          this.toastr.error('Erro ao enviar link de recuperação.');
-        },
-      });
+            this.isLoading = false;
+          },
+        });
     }
   }
 

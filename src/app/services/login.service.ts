@@ -24,7 +24,6 @@ export class LoginService {
       );
   }
 
-  // Método para registro
   signup(
     name: string,
     email: string,
@@ -32,12 +31,6 @@ export class LoginService {
   ): Observable<LoginResponse> {
     return this.httpClient
       .post<LoginResponse>(`${this.apiUrl}/register`, { name, email, password })
-      .pipe(
-        tap((value) => {
-          sessionStorage.setItem('auth-token', value.token);
-          sessionStorage.setItem('username', value.name);
-        })
-      );
   }
 
   sendRecoveryEmail(email: string): Observable<HttpResponse<string>> {
