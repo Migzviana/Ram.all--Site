@@ -40,6 +40,8 @@
       margin: 20px 0;
 
       .buttonMenu {
+        display: flex;
+        align-items: center;
         background: none;
         border: none;
         font-size: 16px;
@@ -50,8 +52,15 @@
         transition: background-color 0.3s;
         cursor: pointer;
         width: 100%;
-        text-align: center;
+        text-align: left;
         display: block;
+
+        img {
+          width: 24px;
+          height: 28px;
+          margin-right: 8px;
+          vertical-align: middle;
+        }
 
         &:hover {
           background-color: rgba($primary-color, 0.1);
@@ -76,8 +85,29 @@
     cursor: pointer;
     transition: background-color 0.3s;
 
+        &:hover {
+          background-color: darken($primary-color, 10%);
+          }
+
+        &.active {
+          background-color: $primary-color;
+          color: white;
+          font-weight: bold;
+        }
+      }
+    }
+
+  .logout-btn {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 10px 50px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
     &:hover {
       background-color: darken($primary-color, 10%);
     }
   }
-}

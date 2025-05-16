@@ -4,9 +4,10 @@
     <h1>Ramais</h1>
     <span class="subtitle">Gerencie os ramais com eficiência</span>
     <nav class="menu">
-      <button class="buttonMenu" (click)="switchView('all')">Todos os Ramais</button>
-      <button class="buttonMenu" (click)="switchView('available')">Ramais Disponíveis</button>
-      <button class="buttonMenu" (click)="switchView('range')">Intervalo</button>
+      <button class="buttonMenu" (click)="switchView('all')"><img src="/assets/svg/extension.svg" alt="Icone do all">Todos os Ramais</button>
+      <button class="buttonMenu" (click)="switchView('available')"><img src="/assets/svg/available.svg" alt="Icone do available">Ramais Disponíveis</button>
+      <button class="buttonMenu" (click)="switchView('unavailable')"><img src="/assets/svg/Unavailable.svg" alt="Icone do range">Ramais Indisponiveis</button>
+      <button class="buttonMenu" (click)="switchView('range')"><img src="/assets/svg/settings.svg" alt="Icone do range">Configurar Intervalo</button>
     </nav>
   </div>
 

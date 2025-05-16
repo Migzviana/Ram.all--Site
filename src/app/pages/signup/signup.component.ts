@@ -6,7 +6,7 @@ import {
   ValidationErrors,
   ReactiveFormsModule,
   Validators,
-  AbstractControl
+  AbstractControl,
 } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { Router } from '@angular/router';
@@ -26,11 +26,11 @@ interface SignupForm {
   imports: [
     DefaultLoginLayoutComponent,
     ReactiveFormsModule,
-    PrimaryInputComponent
+    PrimaryInputComponent,
   ],
   providers: [LoginService],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
   signupForm!: FormGroup<SignupForm>;
@@ -42,18 +42,29 @@ export class SignupComponent {
   ) {
     this.signupForm = new FormGroup(
       {
-        name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+        name: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
         email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-        passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)])
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
+        passwordConfirm: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
       },
       {
-        validators: this.passwordsMatchValidator
+        validators: this.passwordsMatchValidator,
       }
     );
   }
 
-  private passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
+  private passwordsMatchValidator(
+    group: AbstractControl
+  ): ValidationErrors | null {
     const password = group.get('password')?.value;
     const passwordConfirm = group.get('passwordConfirm')?.value;
     return password === passwordConfirm ? null : { passwordsMismatch: true };
@@ -72,14 +83,21 @@ export class SignupComponent {
     const { name, email, password } = this.signupForm.value;
 
     this.loginService.signup(name, email, password).subscribe({
-      next: () => this.toastService.success('Registro feito com sucesso!'),
+      next: () => {
+        this.toastService.success('Registro feito com sucesso!');
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1500);
+      },
       error: (err) => {
         if (err.status === 400) {
           this.toastService.error('Este e-mail já está cadastrado!');
         } else {
-          this.toastService.error('Erro inesperado! Tente novamente mais tarde');
+          this.toastService.error(
+            'Erro inesperado! Tente novamente mais tarde'
+          );
         }
-      }
+      },
     });
   }
 

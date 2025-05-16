@@ -12,7 +12,13 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-main-extension-page',
   standalone: true,
-  imports: [ExtensionSearchComponent, CommonModule, SidebarComponent, ExtensionTableComponent, FormsModule],
+  imports: [
+    ExtensionSearchComponent,
+    CommonModule,
+    SidebarComponent,
+    ExtensionTableComponent,
+    FormsModule,
+  ],
   templateUrl: './main-extension-page.component.html',
   styleUrls: ['./main-extension-page.component.scss'],
 })
@@ -21,6 +27,7 @@ export class MainExtensionPageComponent implements OnInit {
   filteredExtensions: Extension[] = [];
   availableExtensions: Extension[] = [];
   filteredAvailableExtensions: Extension[] = [];
+  filteredUnavailableExtensions: Extension[] = [];
 
   currentUserEmail: string | null = null;
 
@@ -28,21 +35,22 @@ export class MainExtensionPageComponent implements OnInit {
   rangeStart = 0;
   rangeEnd = 0;
 
-  currentView: 'all' | 'available' | 'range' = 'all';
+  currentView: 'all' | 'available' | 'range' | 'unavailable' = 'all';
 
   constructor(
     private extensionService: ExtensionService,
     private toastService: ToastrService,
-    private router: Router 
+    private router: Router
   ) {}
 
-  setView(view: 'all' | 'available' | 'range') {
+  setView(view: 'all' | 'available' | 'range' | 'unavailable') {
     this.currentView = view;
   }
 
   ngOnInit(): void {
     this.loadAll();
     this.loadAvailable();
+    this.loadUnavailable();
   }
 
   loadAll(): void {
@@ -52,7 +60,7 @@ export class MainExtensionPageComponent implements OnInit {
         this.filteredExtensions = [...data];
         this.filteredRangeExtensions = [...data];
       },
-      error: () => this.toastService.error('Erro ao carregar todos os ramais.')
+      error: () => this.toastService.error('Erro ao carregar todos os ramais.'),
     });
   }
 
@@ -62,18 +70,40 @@ export class MainExtensionPageComponent implements OnInit {
         this.availableExtensions = data;
         this.filteredAvailableExtensions = [...data];
       },
-      error: () => this.toastService.error('Erro ao carregar disponíveis.')
+      error: () => this.toastService.error('Erro ao carregar disponíveis.'),
     });
   }
 
-  
+  loadUnavailable(): void {
+    this.extensionService.getUnavailableExtensions().subscribe({
+      next: (data) => {
+        console.log('Dados retornados da api para aqui')
+        this.filteredUnavailableExtensions = data.filter(
+          (ext) => ext.loggedUser
+        );
+      },
+      error: () => this.toastService.error('Erro ao carregar ramais em uso.'),
+    });
+  }
 
-  applyRange(): void {
+  applySetRange(): void {
     if (this.rangeStart && this.rangeEnd && this.rangeStart <= this.rangeEnd) {
-      this.filteredRangeExtensions = this.extensions.filter(ext => {
-        const num = parseInt(ext.extensionNumber, 10);
-        return num >= this.rangeStart && num <= this.rangeEnd;
-      });
+      this.extensionService
+        .setExtensionRange(this.rangeStart, this.rangeEnd)
+        .subscribe({
+          next: (res) => {
+            this.toastService.success(res.message || 'Intervalo Atualizado');
+
+            this.filteredRangeExtensions = this.extensions.filter((ext) => {
+              const num = parseInt(ext.extensionNumber, 10);
+              return num >= this.rangeStart && num <= this.rangeEnd;
+            });
+          },
+          error: (err) => {
+            const msg = err.error?.message || 'Erro ao atualizar o intervalo.';
+            this.toastService.error(msg);
+          },
+        });
     } else {
       this.toastService.warning('Intervalo inválido.');
       this.filteredRangeExtensions = [];
@@ -84,20 +114,22 @@ export class MainExtensionPageComponent implements OnInit {
     const lower = term.toLowerCase().trim();
     switch (this.currentView) {
       case 'all':
-        this.filteredExtensions = this.extensions.filter(ext =>
-          ext.extensionNumber.includes(lower) ||
-          (ext.loggedUser && ext.loggedUser.toLowerCase().includes(lower))
+        this.filteredExtensions = this.extensions.filter(
+          (ext) =>
+            ext.extensionNumber.includes(lower) ||
+            (ext.loggedUser && ext.loggedUser.toLowerCase().includes(lower))
         );
         break;
       case 'available':
-        this.filteredAvailableExtensions = this.availableExtensions.filter(ext =>
-          ext.extensionNumber.includes(lower)
+        this.filteredAvailableExtensions = this.availableExtensions.filter(
+          (ext) => ext.extensionNumber.includes(lower)
         );
         break;
       case 'range':
-        this.filteredRangeExtensions = this.extensions.filter(ext =>
-          ext.extensionNumber.includes(lower) ||
-          (ext.loggedUser && ext.loggedUser.toLowerCase().includes(lower))
+        this.filteredRangeExtensions = this.extensions.filter(
+          (ext) =>
+            ext.extensionNumber.includes(lower) ||
+            (ext.loggedUser && ext.loggedUser.toLowerCase().includes(lower))
         );
         break;
     }
@@ -107,7 +139,7 @@ export class MainExtensionPageComponent implements OnInit {
     this.extensionService.loginExtension(extensionNumber).subscribe({
       next: () => {
         sessionStorage.setItem('user-extension', extensionNumber);
-        this.toastService.success(' Login realizado com sucesso!');
+        this.toastService.success('Login realizado com sucesso!');
         this.ngOnInit();
       },
       error: (err) => {
@@ -116,7 +148,6 @@ export class MainExtensionPageComponent implements OnInit {
       },
     });
   }
-
 
   handleLogout(extensionNumber: string): void {
     this.extensionService.logoutExtension(extensionNumber).subscribe({
@@ -132,10 +163,9 @@ export class MainExtensionPageComponent implements OnInit {
     });
   }
 
-
   logout(): void {
     const extensionNumber = sessionStorage.getItem('user-extension');
-  
+
     if (extensionNumber) {
       this.extensionService.logoutExtension(extensionNumber).subscribe({
         next: () => {
@@ -149,7 +179,7 @@ export class MainExtensionPageComponent implements OnInit {
       this.toastService.warning('Saindo do sistema...');
       this.router.navigate(['/login']);
     }
-  } 
+  }
 
   canLogin = (ext: Extension) => !ext.loggedUser;
 

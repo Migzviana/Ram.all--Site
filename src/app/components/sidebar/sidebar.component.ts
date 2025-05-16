@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent {
   @Output() onLogout = new EventEmitter<void>()
-  @Output() viewChange = new EventEmitter<'all' | 'available' | 'range'>();
+  @Output() viewChange = new EventEmitter<'all' | 'available' | 'range' | 'unavailable'>();
 
   constructor(private router: Router) {}
 
-  switchView(view: 'all' | 'available' | 'range') {
+  switchView(view: 'all' | 'available' |'unavailable' | 'range' ) {
     this.viewChange.emit(view);
   }
 
