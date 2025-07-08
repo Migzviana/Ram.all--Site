@@ -11,17 +11,16 @@ import { PrimaryInputComponent } from '../../components/primary-input/primary-in
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
+
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-reset-password',
     imports: [
-        ReactiveFormsModule,
-        DefaultLoginLayoutComponent,
-        PrimaryInputComponent,
-        CommonModule,
-    ],
+    ReactiveFormsModule,
+    DefaultLoginLayoutComponent,
+    PrimaryInputComponent
+],
     templateUrl: './reset-password.component.html',
     styleUrls: ['./reset-password.component.scss']
 })

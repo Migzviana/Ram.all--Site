@@ -9,13 +9,14 @@
         class="btn-primary"
         (click)="submit()"
         [disabled]="disablePrimaryBtn || loading"
-      >
-        <ng-container *ngIf="!loading; else spinnerTpl">{{
+        >
+        @if (!loading) {
+          {{
           primaryBtnText
-        }}</ng-container>
-        <ng-template #spinnerTpl>
+          }}
+        } @else {
           <div class="spinner"></div>
-        </ng-template>
+        }
       </button>
 
       <div class="divider">

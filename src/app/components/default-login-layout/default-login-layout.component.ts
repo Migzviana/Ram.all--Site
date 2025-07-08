@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'app-default-login-layout',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './default-login-layout.component.html',
     styleUrl: './default-login-layout.component.scss'
 })

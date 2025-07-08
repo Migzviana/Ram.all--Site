@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Extension } from '../../interface/extension';
 import { ExtensionService } from '../../services/extension.service';
 import { ExtensionSearchComponent } from '../../components/extension-search/extension-search.component';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
@@ -12,12 +12,11 @@ import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-main-extension-page',
     imports: [
-        ExtensionSearchComponent,
-        CommonModule,
-        SidebarComponent,
-        ExtensionTableComponent,
-        FormsModule,
-    ],
+    ExtensionSearchComponent,
+    SidebarComponent,
+    ExtensionTableComponent,
+    FormsModule
+],
     templateUrl: './main-extension-page.component.html',
     styleUrls: ['./main-extension-page.component.scss']
 })
