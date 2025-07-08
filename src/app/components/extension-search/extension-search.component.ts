@@ -3,11 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
-  selector: 'app-extension-search',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './extension-search.component.html',
-  styleUrls: ['./extension-search.component.scss']
+    selector: 'app-extension-search',
+    imports: [FormsModule],
+    templateUrl: './extension-search.component.html',
+    styleUrls: ['./extension-search.component.scss']
 })
 export class ExtensionSearchComponent implements OnInit, OnDestroy {
   @Input() placeholder: string = "Buscar por número ou usuário";

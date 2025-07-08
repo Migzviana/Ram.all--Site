@@ -10,17 +10,16 @@ import { ExtensionTableComponent } from '../../components/extension-table/extens
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-main-extension-page',
-  standalone: true,
-  imports: [
-    ExtensionSearchComponent,
-    CommonModule,
-    SidebarComponent,
-    ExtensionTableComponent,
-    FormsModule,
-  ],
-  templateUrl: './main-extension-page.component.html',
-  styleUrls: ['./main-extension-page.component.scss'],
+    selector: 'app-main-extension-page',
+    imports: [
+        ExtensionSearchComponent,
+        CommonModule,
+        SidebarComponent,
+        ExtensionTableComponent,
+        FormsModule,
+    ],
+    templateUrl: './main-extension-page.component.html',
+    styleUrls: ['./main-extension-page.component.scss']
 })
 export class MainExtensionPageComponent implements OnInit {
   extensions: Extension[] = [];

@@ -15,16 +15,15 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-reset-password',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    DefaultLoginLayoutComponent,
-    PrimaryInputComponent,
-    CommonModule,
-  ],
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss'],
+    selector: 'app-reset-password',
+    imports: [
+        ReactiveFormsModule,
+        DefaultLoginLayoutComponent,
+        PrimaryInputComponent,
+        CommonModule,
+    ],
+    templateUrl: './reset-password.component.html',
+    styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent {
   resetForm = new FormGroup(

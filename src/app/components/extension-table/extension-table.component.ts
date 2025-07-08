@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  selector: 'app-extension-table',
-  templateUrl: './extension-table.component.html',
-  styleUrls: ['./extension-table.component.scss']
+    imports: [FormsModule, CommonModule],
+    selector: 'app-extension-table',
+    templateUrl: './extension-table.component.html',
+    styleUrls: ['./extension-table.component.scss']
 })
 export class ExtensionTableComponent {
   @Input() extensions: Extension[] = [];

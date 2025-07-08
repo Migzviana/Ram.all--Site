@@ -17,15 +17,14 @@ interface ForgotPasswordForm {
 }
 
 @Component({
-  selector: 'app-forgot-password',
-  standalone: true,
-  imports: [
-    DefaultLoginLayoutComponent,
-    ReactiveFormsModule,
-    PrimaryInputComponent,
-  ],
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss'],
+    selector: 'app-forgot-password',
+    imports: [
+        DefaultLoginLayoutComponent,
+        ReactiveFormsModule,
+        PrimaryInputComponent,
+    ],
+    templateUrl: './forgot-password.component.html',
+    styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent {
   forgotPasswordForm!: FormGroup<ForgotPasswordForm>;
